@@ -3,7 +3,7 @@ Class to return only Working Days
 
 #How to use:
 
-$date = new new WorkingDays();
+$date = new WorkingDays();
 
 $date->working_day('02/04/2016', 3);
 
