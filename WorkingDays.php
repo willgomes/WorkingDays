@@ -1,11 +1,10 @@
 <?php
 
-//namespace [];
+#namespace <Primary>;
 use DateTime;
 
 /**
- *  Class to get only working days
- *  @Author: Wilson Neto <wilson@willgomes.com> 
+ *  Class to get only working days 
  */
 class WorkingDays
 {
@@ -21,11 +20,11 @@ class WorkingDays
         $dates['carnival'] = $dates['easter'] - (47 * $day);
         $dates['corpus_christi'] = $dates['easter'] + (60 * $day);
         
-		/**
-		 * Only Brazil's nationals holidays
-		 * For county holidays or day off, add date in $holidays array
-		 * Format: d/m  
-		 */
+        /**
+        * Only Brazil's nationals holidays
+        * For county holidays or day off, add date in $holidays array
+        * Format: d/m  
+        */
         $this->holidays = array(
             '01/01',
             date('d/m', $dates['carnival']),
@@ -56,11 +55,6 @@ class WorkingDays
         return $working_dayOBJ->format('d/m/Y');
     }
 
-    private function holiday($year, $position)
-    {        
-        return $this->holidays[$position] . "/" . $year;
-    }
-
     /**
      * 
      * This method return only working day.
@@ -77,20 +71,18 @@ class WorkingDays
                 $working_dayOBJ->modify('+1 day');
                 $working_day = $working_dayOBJ->format('d/m/Y');                
             }
-                        
-            for ($j = 0; $j < count($this->holidays); $j++) {
-                if ($working_day == $this->holiday(date("Y"), $j)) {
-                    /**
-                     * Add 1 more day if holiday is TRUE.
-                     */
-                    $working_dayOBJ->modify('+1 day');
-                    $working_day = $working_dayOBJ->format('d/m/Y');
-                } else {
-                    /**
-                     * Verify weekend.
-                     */
-                    $working_day = $this->checkWeekend($working_dayOBJ->format('d/m/Y'));
-                }
+             
+            if(in_array(substr($working_day, 0, -5), $this->holidays)){
+                /**
+                * Add 1 more day if holiday is TRUE.
+                */
+                $working_dayOBJ->modify('+1 day');
+                $working_day = $working_dayOBJ->format('d/m/Y');
+            } else {
+                /**
+                * Verify weekend.
+                */
+                $working_day = $this->checkWeekend($working_dayOBJ->format('d/m/Y'));
             }
         }
         return $working_day;
