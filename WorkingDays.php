@@ -4,7 +4,7 @@
 use DateTime;
 
 /**
- *  Class to get only workdays
+ *  Class to get only working days
  *  @Author: Wilson Neto <wilson@willgomes.com> 
  */
 class WorkingDays
@@ -21,6 +21,11 @@ class WorkingDays
         $dates['carnival'] = $dates['easter'] - (47 * $day);
         $dates['corpus_christi'] = $dates['easter'] + (60 * $day);
         
+		/**
+		 * Only Brazil's nationals holidays
+		 * For county holidays or day off, add date in $holidays array
+		 * Format: d/m  
+		 */
         $this->holidays = array(
             '01/01',
             date('d/m', $dates['carnival']),
@@ -51,11 +56,6 @@ class WorkingDays
         return $working_dayOBJ->format('d/m/Y');
     }
 
-    /**
-     * Only Brazil's nationals holidays
-     * For county holidays or day off, add date in $holidays array
-     * Format: d/m  
-     */
     private function holiday($year, $position)
     {        
         return $this->holidays[$position] . "/" . $year;
