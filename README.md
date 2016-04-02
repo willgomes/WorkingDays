@@ -1,5 +1,11 @@
 # WorkingDays
-Class to return only Working Days
+
+ This Class return only working days.
+ 
+* @param string $working_day  format 'd/m/Y'
+* @param int $ndays
+* @return string format 'd/m/Y'
+
 
 #How to use:
 
