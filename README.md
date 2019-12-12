@@ -18,7 +18,6 @@ The return is a date string at this format d/m/Y
 
 #That's it.
 I created this class to practice and pass time.
-Sorry for my english, I'm still learning...hahaha!
 
 # Retorna uma data contando somente "dias úteis".
 
